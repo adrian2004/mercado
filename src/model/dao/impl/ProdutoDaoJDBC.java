@@ -66,8 +66,29 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
 	@Override
 	public Produto buscarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT produto.*,setor.nome AS nomeSetor FROM produto "
+										+ "INNER JOIN setor ON produto.fk_setor = setor.id "
+										+ "WHERE produto.id = ?");
+			
+			st.setInt(1, id);
+			rs = st.executeQuery();
+			
+			if(rs.next()) {
+				Setor set = instanciarSetor(rs);
+				Produto prod = instanciarProduto(rs, set);
+				
+				return prod;
+			}
+			return null;
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharResultSet(rs);
+			DB.fecharStatement(st);
+		}
 	}
 
 	@Override
@@ -80,5 +101,27 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 	public List<Produto> buscarPorSetor(Setor setor) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private Produto instanciarProduto(ResultSet rs, Setor set) throws SQLException {
+		Produto produto = new Produto();
+		
+		produto.setId(rs.getInt("id"));
+		produto.setNome(rs.getString("nome"));
+		produto.setPreco(rs.getDouble("preco"));
+		produto.setValidade(rs.getDate("validade"));
+		produto.setQuantidade(rs.getInt("quantidade"));
+		produto.setSetor(set);
+		
+		return produto;
+	}
+	
+	private Setor instanciarSetor(ResultSet rs) throws SQLException {
+		Setor setor = new Setor();
+		
+		setor.setId(rs.getInt("fk_setor"));
+		setor.setNome(rs.getString("nomeSetor"));
+		
+		return setor;
 	}
 }

@@ -13,10 +13,16 @@ public class Program {
 		
 		ProdutoDao produtoDao = FabricaDao.criarProdutoDao();
 		
-		Produto produto = new Produto(null, "Macarrão", 15.0, new Date(), 2, new Setor(1, "alimentos"));
+		Produto produto = new Produto(null, "Carne", 45.0, new Date(), 5, new Setor(1, "alimentos"));
 		
-		produtoDao.inserir(produto);
-		System.out.println("Produto inserido! Seu id é " + produto.getId());
+		//inserir
+		//produtoDao.inserir(produto);
+		//System.out.println("Produto inserido! Seu id é " + produto.getId());
+		
+		//buscar por id
+		//System.out.println();
+		produto = produtoDao.buscarPorId(3);
+		System.out.println("Busca com sucesso! Resultado: " + produto);
 	}
 
 }
