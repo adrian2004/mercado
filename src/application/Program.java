@@ -21,8 +21,14 @@ public class Program {
 		
 		//buscar por id
 		//System.out.println();
-		produto = produtoDao.buscarPorId(3);
-		System.out.println("Busca com sucesso! Resultado: " + produto);
+		//produto = produtoDao.buscarPorId(3);
+		//System.out.println("Busca com sucesso! Resultado: " + produto);
+		
+		//buscar todos
+		System.out.println();
+		for(Produto p : produtoDao.buscarTodos()) {
+			System.out.println(p);
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
@@ -93,8 +94,25 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
 	@Override
 	public List<Produto> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT produto.*,setor.nome AS nomeSetor FROM produto "
+										+ "INNER JOIN setor ON produto.fk_setor = setor.id");
+			
+			rs = st.executeQuery();
+			
+			List<Produto> list = new ArrayList<>();
+			while(rs.next()) {
+				Setor set = instanciarSetor(rs);
+				Produto prod = instanciarProduto(rs, set);
+				
+				list.add(prod);
+			}
+			return list;
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 	}
 
 	@Override
