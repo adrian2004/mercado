@@ -1,16 +1,22 @@
 package application;
 
-import java.sql.Connection;
+import java.util.Date;
 
-import db.DB;
+import model.dao.FabricaDao;
+import model.dao.ProdutoDao;
+import model.entities.Produto;
+import model.entities.Setor;
 
 public class Program {
 
 	public static void main(String[] args) {
 		
-		Connection conn = DB.getConnection();
+		ProdutoDao produtoDao = FabricaDao.criarProdutoDao();
 		
-		DB.closeConnection();
+		Produto produto = new Produto(null, "Macarrão", 15.0, new Date(), 2, new Setor(1, "alimentos"));
+		
+		produtoDao.inserir(produto);
+		System.out.println("Produto inserido! Seu id é " + produto.getId());
 	}
 
 }

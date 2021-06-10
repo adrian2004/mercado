@@ -7,7 +7,7 @@ public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private Double preco;
 	private Date validade;
@@ -18,7 +18,7 @@ public class Produto implements Serializable {
 	public Produto() {
 	}
 
-	public Produto(int id, String nome, Double preco, Date validade, int quantidade, Setor setor) {
+	public Produto(Integer id, String nome, Double preco, Date validade, int quantidade, Setor setor) {
 		this.id = id;
 		this.nome = nome;
 		this.preco = preco;
@@ -31,7 +31,7 @@ public class Produto implements Serializable {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -41,6 +43,24 @@ public class DB {
 			return props;
 		} catch(IOException e) {
 			throw new RuntimeException(e);
+		}
+	}
+	
+	public static void fecharResultSet(ResultSet rs) {
+		if(rs != null) {
+			try {
+				rs.close();
+			} catch(SQLException e) {
+				throw new RuntimeException(e.getMessage());
+			}
+		}
+	}
+	
+	public static void fecharStatement(PreparedStatement st) {
+		try {
+			st.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e.getMessage());
 		}
 	}
 	
