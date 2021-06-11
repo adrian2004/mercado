@@ -25,8 +25,14 @@ public class Program {
 		//System.out.println("Busca com sucesso! Resultado: " + produto);
 		
 		//buscar todos
+		//System.out.println();
+		//for(Produto p : produtoDao.buscarTodos()) {
+		//	System.out.println(p);
+		//}
+		
+		//buscar por id
 		System.out.println();
-		for(Produto p : produtoDao.buscarTodos()) {
+		for(Produto p : produtoDao.buscarPorSetor(new Setor(1, "alimentos"))){
 			System.out.println(p);
 		}
 	}
