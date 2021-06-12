@@ -55,7 +55,18 @@ public class ProdutoDaoJDBC implements ProdutoDao {
 
 	@Override
 	public void deletar(int id) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("DELETE FROM produto WHERE id = ?");
+			
+			st.setInt(1, id);
+			
+			st.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharStatement(st);
+		}
 		
 	}
 

@@ -31,10 +31,15 @@ public class Program {
 		//}
 		
 		//buscar por id
+		//System.out.println();
+		//for(Produto p : produtoDao.buscarPorSetor(new Setor(1, "alimentos"))){
+		//	System.out.println(p);
+		//}
+		
+		//deletar
 		System.out.println();
-		for(Produto p : produtoDao.buscarPorSetor(new Setor(1, "alimentos"))){
-			System.out.println(p);
-		}
+		produtoDao.deletar(2);
+		System.out.println("Deletado com sucesso!");
 	}
 
 }
