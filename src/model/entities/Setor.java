@@ -6,22 +6,22 @@ public class Setor implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private int id;
+	private Integer id;
 	private String nome;
 	
 	public Setor() {
 	}
 
-	public Setor(int id, String nome) {
+	public Setor(Integer id, String nome) {
 		this.id = id;
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

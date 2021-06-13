@@ -1,6 +1,8 @@
 package model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 import model.dao.SetorDao;
@@ -16,7 +18,17 @@ public class SetorDaoJDBC implements SetorDao {
 
 	@Override
 	public void inserir(Setor setor) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("INSERT INTO setor (nome) "
+										+ "VALUES (?)");
+			
+			st.setString(1, setor.getNome());
+			
+			st.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		
 	}
 
