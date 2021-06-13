@@ -13,7 +13,7 @@ public class Program {
 		
 		ProdutoDao produtoDao = FabricaDao.criarProdutoDao();
 		
-		Produto produto = new Produto(null, "Carne", 45.0, new Date(), 5, new Setor(1, "alimentos"));
+		Produto produto = new Produto(null, "Carne", 40.0, new Date(), 10, new Setor(1, "alimentos"));
 		
 		//inserir
 		//produtoDao.inserir(produto);
@@ -37,9 +37,14 @@ public class Program {
 		//}
 		
 		//deletar
+		//System.out.println();
+		//produtoDao.deletar(2);
+		//System.out.println("Deletado com sucesso!");
+		
+		//alterar
 		System.out.println();
-		produtoDao.deletar(2);
-		System.out.println("Deletado com sucesso!");
+		produtoDao.alterar(4, produto);
+		System.out.println("Sucesso!");
 	}
 
 }
