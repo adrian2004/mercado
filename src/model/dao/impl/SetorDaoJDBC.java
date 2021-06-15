@@ -49,7 +49,18 @@ public class SetorDaoJDBC implements SetorDao {
 
 	@Override
 	public void alterar(int id, Setor setor) {
-		// TODO Auto-generated method stub
+		PreparedStatement st = null;
+		try {
+			st = conn.prepareStatement("UPDATE setor "
+										+ "SET nome = ? "
+										+ "WHERE id = ?");
+			st.setString(1, setor.getNome());
+			st.setInt(2, id);
+			
+			st.executeUpdate();
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		}
 		
 	}
 

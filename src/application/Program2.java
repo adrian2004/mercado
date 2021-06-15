@@ -10,16 +10,19 @@ public class Program2 {
 
 		SetorDao setorDao = FabricaDao.criarSetorDao();
 		
-		Setor setor = new Setor(null, "limpeza");
+		Setor setor = new Setor(null, "bebidas");
 		
 		//inserir
 		//setorDao.inserir(setor);
 		//System.out.println("Inserção com sucesso!");
 
 		//deletar
-		setorDao.deletar(2);
-		System.out.println("Deleção bem sucedida!");
+		//setorDao.deletar(2);
+		//System.out.println("Deleção bem sucedida!");
 		
+		//alterar
+		setorDao.alterar(1, setor);
+		System.out.println("Alteração bem sucedida!");
 	}
 
 }
