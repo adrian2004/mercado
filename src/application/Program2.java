@@ -13,9 +13,13 @@ public class Program2 {
 		Setor setor = new Setor(null, "limpeza");
 		
 		//inserir
-		setorDao.inserir(setor);
-		System.out.println("Inserção com sucesso!");
+		//setorDao.inserir(setor);
+		//System.out.println("Inserção com sucesso!");
 
+		//deletar
+		setorDao.deletar(2);
+		System.out.println("Deleção bem sucedida!");
+		
 	}
 
 }
