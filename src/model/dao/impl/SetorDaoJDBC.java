@@ -2,9 +2,12 @@ package model.dao.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import db.DB;
 import model.dao.SetorDao;
 import model.entities.Setor;
 
@@ -28,6 +31,8 @@ public class SetorDaoJDBC implements SetorDao {
 			st.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharStatement(st);
 		}
 		
 	}
@@ -43,6 +48,8 @@ public class SetorDaoJDBC implements SetorDao {
 			st.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharStatement(st);
 		}
 		
 	}
@@ -60,20 +67,65 @@ public class SetorDaoJDBC implements SetorDao {
 			st.executeUpdate();
 		} catch(SQLException e) {
 			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharStatement(st);
 		}
 		
 	}
 
 	@Override
 	public Setor buscarPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM setor WHERE id = ?");
+			
+			st.setInt(1, id);
+			
+			rs = st.executeQuery();
+			if(rs.next()) {
+				Setor set = instanciarSetor(rs);
+				
+				return set;
+			}
+			return null;
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharResultSet(rs);
+			DB.fecharStatement(st);
+		}
 	}
 
 	@Override
 	public List<Setor> buscarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement("SELECT * FROM setor");
+			
+			rs = st.executeQuery();
+			List<Setor> list = new ArrayList<>();
+			while(rs.next()) {
+				Setor set = instanciarSetor(rs);
+				
+				list.add(set);
+			}
+			return list;
+		} catch(SQLException e) {
+			throw new RuntimeException(e.getMessage());
+		} finally {
+			DB.fecharResultSet(rs);
+			DB.fecharStatement(st);
+		}
 	}
 
+	private Setor instanciarSetor(ResultSet rs) throws SQLException {
+		Setor setor = new Setor();
+		
+		setor.setId(rs.getInt("id"));
+		setor.setNome(rs.getString("nome"));
+		
+		return setor;
+	}
 }
