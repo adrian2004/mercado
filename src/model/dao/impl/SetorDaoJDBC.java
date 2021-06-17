@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import db.DB;
+import db.DbException;
 import model.dao.SetorDao;
 import model.entities.Setor;
 
@@ -30,7 +31,7 @@ public class SetorDaoJDBC implements SetorDao {
 			
 			st.executeUpdate();
 		} catch(SQLException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.fecharStatement(st);
 		}
@@ -47,7 +48,7 @@ public class SetorDaoJDBC implements SetorDao {
 			
 			st.executeUpdate();
 		} catch(SQLException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.fecharStatement(st);
 		}
@@ -66,7 +67,7 @@ public class SetorDaoJDBC implements SetorDao {
 			
 			st.executeUpdate();
 		} catch(SQLException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.fecharStatement(st);
 		}
@@ -90,7 +91,7 @@ public class SetorDaoJDBC implements SetorDao {
 			}
 			return null;
 		} catch(SQLException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.fecharResultSet(rs);
 			DB.fecharStatement(st);
@@ -113,7 +114,7 @@ public class SetorDaoJDBC implements SetorDao {
 			}
 			return list;
 		} catch(SQLException e) {
-			throw new RuntimeException(e.getMessage());
+			throw new DbException(e.getMessage());
 		} finally {
 			DB.fecharResultSet(rs);
 			DB.fecharStatement(st);
